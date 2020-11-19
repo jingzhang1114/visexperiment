@@ -1,22 +1,4 @@
 
-// document.getElementsByClassName("delete-button").addEventListener("click", event => {
-//     console.log("click")
-//     console.log(event.currentTarget.data)
-//     // fetch("/quotes", {
-//     //     method: 'delete',
-//     //     headers: { 'Content-Type': 'application/json' },
-//     //     body: JSON.stringify({
-//     //         name: event.currentTarget.data
-//     //     })
-//     // })
-//     //     .then(res => {
-//     //         if (res.ok) return res.json()
-//     //     })
-//     //     .then(data => {
-//     //         window.location.reload()
-//     //     })
-// })
-
 
 var elements = document.getElementsByClassName("delete-button");
 

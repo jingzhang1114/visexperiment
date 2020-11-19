@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Title for experiment</h1>
+<h2>Consent form</h2>
+<button id="submit">Submit</button>
+
+<script src="/jquery/jquery.js"></script>
+
+<script>
+    document.getElementById("submit").addEventListener("click", () => {
+        console.log("Submit consent!");
+        document.getElementById("next-button").disabled = false;
+        //d3.select('#next-button').attr('disabled', false);
+        //experimentr.next();
+        //d3.select('#submit').on('click', experimentr.next);
+    })
+</script>
+</body>
+</html>

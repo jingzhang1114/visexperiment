@@ -7,62 +7,60 @@ const port = 3000;
 app.use(BodyParser.json());
 app.use(BodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"))
+app.use('/jquery', express.static(__dirname + '/node_modules/jquery/dist/'));
+app.use('/d3', express.static(__dirname + '/node_modules/d3/dist/'));
 
 app.set("view engine", "ejs")
-
-
 
 const MongoClient = require("mongodb").MongoClient;
 
 const connection = 'mongodb+srv://test1:datavis@gettingstarted.kf9d9.gcp.mongodb.net/test?retryWrites=true&w=majority'
 
 var database, collection;
-// app.listen(port, () => {
-//     console.log(`Example app listening at http://localhost:${port}`)
-//     MongoClient.connect(connection, {useNewUrlParser: true}, (error, client) => {
-//         if(error) throw error
-//         database = client.db("example")
-//         collection = database.collection("people")
-//         console.log("Add a database")
-//     })
-// })
-//
-// app.post("/person", (request, response) => {
-//     collection.insertOne(request.body, (error, result) => {
-//         if(error) {
-//             return response.status(500).send(error);
-//         }
-//         response.send(result.result);
-//     });
-// });
 
 app.listen(3000, () => {
     console.log(`Example app listening at http://localhost:${port}`)
 })
 
-
-
+// var startTime = new Date();
+// var string = startTime.getTime()+Math.random().toString(36).slice(-6);
+//
+// console.log(string)
 
 
 MongoClient.connect(connection, {useNewUrlParser: true}, (error, client) => {
     if(error) throw error
-    database = client.db("example")
-    collection = database.collection("people")
+    database = client.db("test1")
+    collection = database.collection("demo1")
     console.log("connected")
 
     app.get('/', (req, res) => {
-        //res.sendFile(__dirname + "/public/index.html")
-        collection.find().toArray().then(results => {
-            console.log("get the data")
-            res.render(__dirname + "/public/index.ejs", {quotes: results})
-        })
-            .catch(error => console.error(error))
+        res.sendFile(__dirname + "/public/index.html")
+        // collection.find().toArray().then(results => {
+        //     console.log("get the data")
+        //     //res.sendFile(__dirname + "/public/modules/consent/index.html")
+        //     res.render(__dirname + "/public/modules/consent/index.ejs", {quotes: results})
+        // })
+        //     .catch(error => console.error(error))
     })
 })
 
+app.put("/", (req, res) => {
+    collection.findOneAndUpdate(
+        {participantId: req.body.participantId},
+        {
+            $set: req.body
+        },
+        {upsert:true})
+            .then(res => {
+                console.log(res)
+            })
+            .catch(error => console.log(error))
+
+})
 
 
-app.post("/quotes", (req, res) => {
+app.post("/", (req, res) => {
     //console.log(req.body)
     collection.insertOne(req.body).then(result => {
         console.log(result)

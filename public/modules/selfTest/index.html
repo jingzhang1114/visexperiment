@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="selfTest">
+    <p id="testinstr">
+        Examine the following statements and indicate how often you feel that way. Please answer as honestly as possible in order to get the most accurate results.
+    </p>
+
+    <div id="q1">Do you have difficulty remembering people's names or phone numbers?
+        <div id="q1_answer">
+            <input type="radio" id="q1_a1" name="q1" value="1"> Almost always
+            <input type="radio" id="q1_a2" name="q1" value="2"> Often
+            <input type="radio" id="q1_a3" name="q1" value="3"> Sometimes
+            <input type="radio" id="q1_a4" name="q1" value="4"> Rarely
+            <input type="radio" id="q1_a5" name="q1" value="5"> Almost never
+        </div>
+    </div>
+    <br>
+    <div id="q2">How often do you find yourself asking questions like, "What was I about to do next?"
+        <div id="q2_answer">
+            <input type="radio" id="q2_a1" name="q2" value="1"> Almost always
+            <input type="radio" id="q2_a2" name="q2" value="2"> Often
+            <input type="radio" id="q2_a3" name="q2" value="3"> Sometimes
+            <input type="radio" id="q2_a4" name="q2" value="4"> Rarely
+            <input type="radio" id="q2_a5" name="q2" value="5"> Almost never
+        </div>
+    </div>
+    <br>
+    <div id="q3">How often do you have difficulty remembering where you parked your car?
+        <div id="q3_answer">
+            <input type="radio" id="q3_a1" name="q3" value="1"> Almost always
+            <input type="radio" id="q3_a2" name="q3" value="2"> Often
+            <input type="radio" id="q3_a3" name="q3" value="3"> Sometimes
+            <input type="radio" id="q3_a4" name="q3" value="4"> Rarely
+            <input type="radio" id="q3_a5" name="q3" value="5"> Almost never
+        </div>
+    </div>
+    <br>
+</div>
+<script src="/d3/d3.js"></script>
+<script>
+    var data = {};
+
+    // experimentr.startTimer('demo');
+
+    d3.selectAll('input')
+        .filter(function(d) { return this.name === 'q1' ? this : null; })
+        .on('change', function() { data.q1 = this.value; validate(); });
+
+    d3.selectAll('input')
+        .filter(function(d) { return this.name === 'q2' ? this : null; })
+        .on('change', function() { data.q2 = this.value; validate(); });
+
+    d3.selectAll('input')
+        .filter(function(d) { return this.name === 'q3' ? this : null; })
+        .on('change', function() { data.q3 = this.value; validate(); });
+
+    //validate();
+
+    function validate() {
+        if(data.q1 && data.q2 && data.q3) {
+            //experimentr.endTimer('demo');
+            experimentr.addData(data);
+            document.getElementById("next-button").disabled = false;
+            //experimentr.release();
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script src="/jquery/jquery.js"></script>
+<!--<script src="https://d3js.org/d3.v6.min.js"></script>-->
+<script src="/d3/d3.js"></script>
+<script src="experimentr.js"></script>
+<script>
+    experimentr.sequence([
+        'modules/consent',
+        'modules/demographics',
+        'modules/selfTest',
+        'modules/debrief'
+    ]).start();
+</script>
+</body>
+</html>
