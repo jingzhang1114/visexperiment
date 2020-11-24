@@ -34,7 +34,7 @@ var experimentr = (function() {
         experimentr.addData = function(d) {
             for(var attr in d) {
                 data[attr] = d[attr];
-            };
+            }
             experimentr.save();
         };
 
@@ -45,7 +45,7 @@ var experimentr = (function() {
                 body: JSON.stringify(data)
             })
                 .then(res => {
-                    if (res.ok) return res.json()
+                    //if (res.ok) return res.json()
                 })
         };
 
@@ -55,7 +55,8 @@ var experimentr = (function() {
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(data),
             }).then(res => {
-                if (res.ok) return res.json()
+                console.log("saved.")
+                //if (res.ok) return res.json()
             })
         }
 
@@ -63,20 +64,21 @@ var experimentr = (function() {
         experimentr.start = function () {
             experimentr.init();
             current = 0;
-            experimentr.insert();
+            //experimentr.insert();
             experimentr.activate(current);
             //experimentr.startTimer();
         }
 
         experimentr.init = function () {
-            mainDiv = d3.select('body').append('div')
-                .attr('id', 'experimentr');
-            mainDiv.append('div')
-                .attr('id', 'module');
-            mainDiv.append('div')
-                .attr('id', 'control')
-                .append('button')
+            // mainDiv = d3.select('body').append('div')
+            //   .attr('id', 'experimentr');
+            // mainDiv.append('div')
+            //   .attr('id', 'module');
+            // mainDiv.append('div')
+            //   .attr('id', 'control')
+            d3.select("#control").append('button')
                 .attr('type', 'button')
+                .attr('class', 'btn btn-light')
                 .attr('id', 'next-button')
                 .attr('disabled', true)
                 .text('Next')
@@ -108,6 +110,11 @@ var experimentr = (function() {
             current = current + 1;
             experimentr.activate(current);
             //console.log("next")
+        }
+
+        experimentr.end = function() {
+            data.endtime = new Date();
+            experimentr.save();
         }
 
         return experimentr;

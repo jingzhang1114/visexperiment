@@ -5,14 +5,38 @@
     <title>Title</title>
 </head>
 <body>
-<h1>Title for experiment</h1>
-<h2>Debrief form</h2>
-<button id="submit">Submit</button>
+<h1>Thank you again for your participation.</h1>
+<br>
+<div data-spy="scroll" data-target="#list-example" data-offset="0" class="scrollspy-example">
+    <h4 id="list-item-1">What the study is about</h4>
+    <p>Provide a clear, concise explanation in lay language of the purposes of the research, including prominent use of the term "research." (Note: the IRB can waive this element if the study requires deception. In such cases, a debriefing statement should also be used to inform participants at an appropriate time after their involvement in the study.)</p>
+    <h4 id="list-item-2">Why it is important</h4>
+    <p>Describe any probable benefits of participation. Be sure to distinguish between a likely direct benefit (e.g., from therapeutic or intervention research) and a possible indirect benefit (e.g., reflecting on an experience may lead to a better understanding of oneself). If there are no direct benefits, indicate that there are none.</p>
+</div>
+<form>
+    <div class="form-group">
+        <h4>Your feedback</h4>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+        <br>
+        <button type="button" class="btn btn-primary" id="feedback">Finish</button>
+        <div class="alert alert-success" role="alert" id="success">
+            You have completed the study successfully! <a href="index.html" class="alert-link">Back to the first page</a>.
+        </div>
+    </div>
+</form>
+
+<!--<button id="submit">Submit</button>-->
 <script src="/jquery/jquery.js"></script>
 
 <script>
-    document.getElementById("submit").addEventListener("click", () => {
+    //var time = new Date();
+    $("#success").hide();
+    experimentr.end();
+    document.getElementById("feedback").addEventListener("click", () => {
         console.log("Submit debrief!")
+        $("#feedback").hide();
+        $("#success").show();
+
     })
 </script>
 </body>

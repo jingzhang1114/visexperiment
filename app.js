@@ -8,6 +8,7 @@ app.use(BodyParser.json());
 app.use(BodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"))
 app.use('/jquery', express.static(__dirname + '/node_modules/jquery/dist/'));
+app.use('/bootstrap', express.static(__dirname + '/node_modules/bootstrap/dist/'));
 app.use('/d3', express.static(__dirname + '/node_modules/d3/dist/'));
 
 app.set("view engine", "ejs")
@@ -53,7 +54,7 @@ app.put("/", (req, res) => {
         },
         {upsert:true})
             .then(res => {
-                console.log(res)
+                console.log("updated.")
             })
             .catch(error => console.log(error))
 
@@ -63,16 +64,26 @@ app.put("/", (req, res) => {
 app.post("/", (req, res) => {
     //console.log(req.body)
     collection.insertOne(req.body).then(result => {
-        console.log(result)
-        res.redirect("/")
+        console.log("inserted.")
+        //res.redirect("/")
     })
         .catch(error => console.error(error))
     console.log("Submit")
 })
 
-app.delete("/quotes", (req, res) => {
+app.get('/dashboard', (req, res) => {
+    //res.sendFile(__dirname + "/public/index.html")
+    collection.find().toArray().then(results => {
+        console.log("get the data")
+        //res.sendFile(__dirname + "/public/modules/consent/index.html")
+        res.render(__dirname + "/public/modules/dashboard/index.ejs", {quotes: results})
+    })
+        .catch(error => console.error(error))
+})
+
+app.delete("/dashboard", (req, res) => {
     collection.deleteOne(
-        {name: req.body.name}
+        {participantId: req.body.participantId}
     )
         .then(result => {
             console.log("delete")

@@ -12,7 +12,7 @@ var deleteFunction = function(event) {
         method: 'delete',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-            name: theName
+            participantId: theName
         })
     })
         .then(res => {
