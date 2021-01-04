@@ -1,6 +1,6 @@
+/** import libraries */
 const fs = require('fs');
 const express = require('express');
-//const mongoose = require('mongoose');
 const BodyParser = require( "body-parser");
 const mongodb = require("mongodb");
 const json2csv = require("json2csv").parse;
@@ -9,6 +9,8 @@ const port = 3000;
 
 app.use(BodyParser.json());
 app.use(BodyParser.urlencoded({ extended: true }));
+
+/** specify path for front-end frameworks */
 app.use(express.static("public"))
 app.use('/jquery', express.static(__dirname + '/node_modules/jquery/dist/'));
 app.use('/bootstrap', express.static(__dirname + '/node_modules/bootstrap/dist/'));
@@ -16,12 +18,20 @@ app.use('/d3', express.static(__dirname + '/node_modules/d3/dist/'));
 app.use('/leaflet', express.static(__dirname + '/node_modules/leaflet/dist/'));
 app.use('/vis', express.static(__dirname + '/public/modules/vis/'));
 
+
+// use ejs view engine to dynamically render front-end page
 app.set("view engine", "ejs")
 
 
+/** Connect to MongoDB database */
 const MongoClient = mongodb.MongoClient;
 
+/**
+ * collection name: test1
+ * user name: datavis
+ * */
 const connection = 'mongodb+srv://test1:datavis@gettingstarted.kf9d9.gcp.mongodb.net/test?retryWrites=true&w=majority'
+
 
 var database, collection, data;
 
@@ -42,21 +52,12 @@ MongoClient.connect(connection, {useNewUrlParser: true}, (error, client) => {
     })
 })
 
-app.put("/", (req, res) => {
-    collection.findOneAndUpdate(
-        {participantId: req.body.participantId},
-        {
-            $set: req.body
-        },
-        {upsert:true})
-            .then(res => {
-                console.log("updated.")
-            })
-            .catch(error => console.log(error))
 
-})
+/** Router */
 
 
+
+// create a document for a participant
 app.post("/", (req, res) => {
     //console.log(req.body)
     collection.insertOne(req.body).then(result => {
@@ -67,6 +68,25 @@ app.post("/", (req, res) => {
     console.log("Submit")
 })
 
+
+
+// update experiment data
+app.put("/", (req, res) => {
+    collection.findOneAndUpdate(
+        {participantId: req.body.participantId},
+        {
+            $set: req.body
+        },
+        {upsert:true})
+        .then(res => {
+            console.log("updated.")
+        })
+        .catch(error => console.log(error))
+
+})
+
+
+// get all data from database
 app.get('/dashboard', (req, res) => {
 
     collection.find().toArray().then(results => {
@@ -79,6 +99,7 @@ app.get('/dashboard', (req, res) => {
 })
 
 
+// download json file
 app.get('/dashboard/downloadJSON', (req, res) => {
 
         // Write to file
@@ -96,11 +117,21 @@ app.get('/dashboard/downloadJSON', (req, res) => {
 
 })
 
+
+// download csv file
 app.get('/dashboard/downloadCSV', (req, res) => {
 
     // Write to file
 
-    var fields = Object.keys(data[0]);
+    //var fields = Object.keys(data[0]);
+    var fields = [];
+    data.forEach(function(d) {
+        Object.keys(d).forEach(function(key){
+            if(!fields.includes(key)) {
+                fields.push(key);
+            }
+        })
+    })
     var filePath = "result/data.csv";
     try {
         var csv = json2csv(data, {fields});
@@ -119,6 +150,8 @@ app.get('/dashboard/downloadCSV', (req, res) => {
 
 })
 
+
+// delete a document
 app.delete("/dashboard", (req, res) => {
     collection.deleteOne(
         {participantId: req.body.participantId}

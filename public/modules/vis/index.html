@@ -44,6 +44,9 @@
   <!-- Load data, create visualizations -->
   <script src="/modules/vis/js/main.js"></script>
 
+  <!-- Track mouse movement and write to database -->
+  <script src="/modules/vis/js/mousemove.js"></script>
+
 <!--<script>-->
 <!--  // $.holdReady(true);                              //set hold-->
 <!--  // function releaseHold() { $.holdReady(false); }  //callback to release hold-->
@@ -62,45 +65,30 @@
 <!--  // })-->
 <!--</script>-->
 
-<script>
-  $(document).ready(function() {
-    //var data = {};
-    var mousemoveData = [];
-    var clickData = [];
+<!--<script>-->
+<!--  $(document).ready(function() {-->
+
+<!--    var mousemoveData = [];-->
 
 
-    var start = new Date().getTime();
-    document.addEventListener("mousemove", trackMouseMove);
-    function trackMouseMove(e) {
-      //console.log(e.pageX);
-        var move = {};
-        move.x = e.pageX;
-        move.y = e.pageY;
-        move.time = new Date().getTime() - start;
-        mousemoveData.push(move);
-    }
+<!--    var start = new Date().getTime();-->
+<!--    document.addEventListener("mousemove", trackMouseMove);-->
+<!--    function trackMouseMove(e) {-->
+<!--      //console.log(e.pageX);-->
+<!--        var move = {};-->
+<!--        move.x = e.pageX;-->
+<!--        move.y = e.pageY;-->
+<!--        move.time = new Date().getTime() - start;-->
+<!--        mousemoveData.push(move);-->
+<!--    }-->
 
-    document.addEventListener("click", trackClick);
-    function trackClick(e) {
-      //console.log(e.pageX);
-      var click = {};
-      click.x = e.pageX;
-      click.y = e.pageY;
-      click.target = e.target;
-      console.log(e.target);
-      click.time = new Date().getTime() - start;
-      clickData.push(click);
-    }
-
-    setTimeout(stopTrack, 5000);
-    function stopTrack() {
-      document.removeEventListener("mousemove", trackMouseMove);
-      document.removeEventListener("click", trackClick);
-      console.log(clickData);
-      experimentr.addData({mousemoveData: mousemoveData, clickData: clickData});
-      document.getElementById("next-button").disabled = false;
-    }
-  })
-</script>
+<!--    setTimeout(stopTrack, 5000);-->
+<!--    function stopTrack() {-->
+<!--      document.removeEventListener("mousemove", trackMouseMove);-->
+<!--      experimentr.addData({mousemoveData: mousemoveData});-->
+<!--      document.getElementById("next-button").disabled = false;-->
+<!--    }-->
+<!--  })-->
+<!--</script>-->
 </body>
 </html>

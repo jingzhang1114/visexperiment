@@ -1,3 +1,5 @@
+
+/** CSS style for index.html */
 #experimentr {
     margin-top: 5%;
 }
@@ -11,22 +13,7 @@ body {
     float: right;
 }
 
-#consent {
-    float: right;
-}
-
-.option {
-    width: 45px;
-}
-
-#demographics {
-    font-size: 18px;
-    text-align: left;
-}
-
-#selfTest {
-    font-size: 18px;
-}
+/** CSS style for entry module */
 
 .role-btn {
     margin-top: 5%;
@@ -37,23 +24,46 @@ body {
 }
 
 #intr-entry {
-    margin-top: 5%;
+    margin-top: 15%;
     text-align: center;
 }
 
 #password {
     margin-left: 2%;
 }
+
+#reminder {
+    margin-top: 10px;
+}
 #sign-in-warning {
     color: red;
     visibility: hidden;
 }
 
-/*#researcher {*/
+/** CSS style for consent module */
 
-/*}*/
+#consent {
+    float: right;
+}
 
-/*#demographics .option {*/
-/*    width: 50px;*/
-/*    text-align: left;*/
-/*}*/
+.option {
+    width: 45px;
+}
+
+/** CSS style for demographics module */
+#demographics {
+    font-size: 18px;
+    text-align: left;
+    margin-top: 12%;
+}
+
+/** CSS style for selfTest module */
+#selfTest {
+    margin-top: 12%;
+    font-size: 18px;
+}
+
+/** CSS style for debrief module */
+#debrief {
+    margin-top: 12%;
+}
