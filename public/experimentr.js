@@ -1,4 +1,4 @@
-//var d3 = require("d3");
+/** Supervise the progress of the experiment, control modules and send requests to backend */
 
 var experimentr = (function() {
         var experimentr = {type: "test"},
@@ -31,6 +31,7 @@ var experimentr = (function() {
             return experimentr;
         }
 
+        // add a module data into the participant's document
         experimentr.addData = function(d) {
             for(var attr in d) {
                 data[attr] = d[attr];
@@ -38,6 +39,7 @@ var experimentr = (function() {
             experimentr.save();
         };
 
+        // insert a document
         experimentr.insert = function () {
             fetch("/", {
                 method: 'post',
@@ -49,6 +51,7 @@ var experimentr = (function() {
                 })
         };
 
+        // update a document
         experimentr.save = function() {
             fetch("/", {
                 method: 'put',
@@ -68,18 +71,11 @@ var experimentr = (function() {
         experimentr.start = function () {
             experimentr.init();
             current = 0;
-            //experimentr.insert();
             experimentr.activate(current);
-            //experimentr.startTimer();
         }
 
+        // Initiate the module control
         experimentr.init = function () {
-            // mainDiv = d3.select('body').append('div')
-            //   .attr('id', 'experimentr');
-            // mainDiv.append('div')
-            //   .attr('id', 'module');
-            // mainDiv.append('div')
-            //   .attr('id', 'control')
             d3.select("#control").append('button')
                 .attr('type', 'button')
                 .attr('class', 'btn btn-light')
@@ -89,31 +85,21 @@ var experimentr = (function() {
                 .on('click', experimentr.next);
         }
 
+        // remove old module and load new module
         experimentr.activate = function (i) {
             d3.select('#module').html("");
             d3.select('#next-button').attr('disabled', true);
             if (i === sequence.length - 1) {
                 d3.select('#next-button').remove();
-                //experimentr.end();
             }
 
-            // d3.html(sequence[i], function(err, d) {
-            //     if(err) console.log(err);
-            //     d3.select('#module').node().appendChild(d);
-            // });
             $("#module").load(sequence[i]);
         }
 
         experimentr.next = function() {
-            //d3.select('#next-button').on('click', experimentr.next);
-
-            //d3.select('#next-button').style('display', 'inline');
-            //d3.select('#next-button').attr('disabled', false);
-            //d3.select('#next-button').on('click', experimentr.next);
             console.log(data.participantId)
             current = current + 1;
             experimentr.activate(current);
-            //console.log("next")
         }
 
         experimentr.end = function() {
