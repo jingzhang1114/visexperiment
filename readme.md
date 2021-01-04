@@ -38,10 +38,15 @@ edit app.js to connect database and respond new requests from front-end
 
 ## Some templates for modules
 
-/public/modules/consent
+Consent module: /public/modules/consent
 
-/public/modules/demographics
+Demographics module:/public/modules/demographics
 
-/public/modules/debrief
+Debrief module:/public/modules/debrief
 
-/public/modules/vis/js/mousemove.js
+Mouse event Logs for visual task module: /public/modules/vis/js/mousemove.js
+
+
+## Reference
+Lane Harrison (2019). experimentr: a hosting/data-collection backend and module-based frontend for web-based visualization studies
+https://github.com/codementum/experimentr
