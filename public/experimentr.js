@@ -1,14 +1,17 @@
 /** Supervise the progress of the experiment, control modules and send requests to backend */
 
 var experimentr = (function() {
+        /** Prepare Key Variables */
         var experimentr = {type: "test"},
             sequence,
             current,
-            mainDiv,
             data = {};
 
+        // get start time
         var startTime = new Date();
         data.starttime = startTime;
+
+        // generate unique id
         data.participantId = startTime.getTime() + Math.random().toString(36).slice(-6);
 
         // access for participantId
@@ -21,52 +24,18 @@ var experimentr = (function() {
             return data;
         }
 
+        // access for the index of current module
         experimentr.current = function() {
             return current;
         }
 
-        // define the sequence of the experiment
+        // define the sequence of the modules
         experimentr.sequence = function(s) {
             sequence = s;
             return experimentr;
         }
 
-        // add a module data into the participant's document
-        experimentr.addData = function(d) {
-            for(var attr in d) {
-                data[attr] = d[attr];
-            }
-            experimentr.save();
-        };
-
-        // insert a document
-        experimentr.insert = function () {
-            fetch("/", {
-                method: 'post',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)
-            })
-                .then(res => {
-                    //if (res.ok) return res.json()
-                })
-        };
-
-        // update a document
-        experimentr.save = function() {
-            fetch("/", {
-                method: 'put',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify(data),
-            }).then(res => {
-                console.log("saved.")
-                //if (res.ok) return res.json()
-            })
-        }
-
-        experimentr.record = function() {
-
-        }
-
+        /** Life cycle of the experiment */
         // Starts the experiment
         experimentr.start = function () {
             experimentr.init();
@@ -96,16 +65,53 @@ var experimentr = (function() {
             $("#module").load(sequence[i]);
         }
 
+        // go to the next module
         experimentr.next = function() {
-            console.log(data.participantId)
+            //console.log(data.participantId)
             current = current + 1;
             experimentr.activate(current);
         }
 
+        // save the end time
         experimentr.end = function() {
             data.endtime = new Date();
             experimentr.save();
         }
+
+        /** Send requests to the back-end */
+        // add a module data into the participant's document
+        experimentr.addData = function(d) {
+            for(var attr in d) {
+                data[attr] = d[attr];
+            }
+            experimentr.save();
+        };
+
+        // insert a document
+        experimentr.insert = function () {
+            fetch("/", {
+                method: 'post',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            })
+                .then(res => {
+                    console.log("inserted.")
+                })
+        };
+
+        // update a document
+        experimentr.save = function() {
+            fetch("/", {
+                method: 'put',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(data),
+            }).then(res => {
+                console.log("saved.")
+                //if (res.ok) return res.json()
+            })
+        }
+
+
 
         return experimentr;
 
