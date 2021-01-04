@@ -1,6 +1,10 @@
 # Master Project : An Experiment Platform For Visual Analytic Tasks
 
-* Demo: http://ec2-3-84-52-50.compute-1.amazonaws.com:3001/index.html *
+* Demo: http://ec2-3-84-52-50.compute-1.amazonaws.com:3001/index.html 
+
+## Introduction
+
+This project is designed for those who works on visual studies. It can help build up a functional website quickly and supervise the research data on a user-friendly dashboard. Bootstrap, D3.js, Express.js and MongoDb are used in this project.
 
 ## Quick setup
 
@@ -9,6 +13,7 @@
 `node app.js`
 
 The app is running on localhost:3000.
+
 
 ## Design
 
