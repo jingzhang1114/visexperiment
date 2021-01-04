@@ -1,3 +1,4 @@
+/** Load data, create visualizations */
 
 var allData = [];
 

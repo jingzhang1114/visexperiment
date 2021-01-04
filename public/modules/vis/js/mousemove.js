@@ -1,12 +1,15 @@
+/** Track mouse movement and write to database */
+
 $(document).ready(function() {
 
     var mousemoveData = [];
 
-
     var start = new Date().getTime();
+
     document.addEventListener("mousemove", trackMouseMove);
+
     function trackMouseMove(e) {
-        //console.log(e.pageX);
+        // store x, y and time
         var move = {};
         move.x = e.pageX;
         move.y = e.pageY;
@@ -14,7 +17,9 @@ $(document).ready(function() {
         mousemoveData.push(move);
     }
 
+    // record for 5 seconds
     setTimeout(stopTrack, 5000);
+
     function stopTrack() {
         document.removeEventListener("mousemove", trackMouseMove);
         experimentr.addData({mousemoveData: mousemoveData});

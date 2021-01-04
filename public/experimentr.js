@@ -36,7 +36,7 @@ var experimentr = (function() {
         }
 
         /** Life cycle of the experiment */
-        // Starts the experiment
+        // Start the experiment
         experimentr.start = function () {
             experimentr.init();
             current = 0;

@@ -1,4 +1,6 @@
 
+/** Visualization objects, using Leaflet library*/
+
 /*
  *  StationMap - Object constructor function
  *  @param _parentElement   -- HTML element in which to draw the visualization
@@ -46,9 +48,6 @@ StationMap.prototype.initVis = function() {
 
 StationMap.prototype.wrangleData = function() {
 	var vis = this;
-	//console.log(vis.data)
-	// Currently no data wrangling/filtering needed
-	// vis.displayData = vis.data;
 
 	// Update the visualization
 	vis.updateVis();
@@ -62,25 +61,16 @@ StationMap.prototype.wrangleData = function() {
 
 StationMap.prototype.updateVis = function() {
 	var vis = this;
-	//var marker = L.marker([42.378774, -71.117303]).addTo(vis.map);
 
 	// Add empty layer groups for the markers / map objects
 	vis.bostonLayerGroup = L.layerGroup().addTo(vis.map);
-	//subwayStations = L.layerGroup().addTo(vis.map);
 
 	vis.data.forEach(function(d) {
 		var popupContent = "<strong>"+d.name+"</strong><br/>";
-		// var popupContent = "<strong>"+d.s+"</strong><br/>";
 		popupContent += "<p>Capacity: "+d.capacity+"</p>";
-		// popupContent += "<p>Available Bikes: "+d.ba+"</p>";
-		// popupContent += "<p>Available Docks: "+d.da+"</p>";
+
 
 		// Create a marker and bind a popup with a particular HTML content
-		//var marker = L.marker([d.la, d.lo])
-		// var marker = L.marker([d.lat, d.lon], {
-		// 	name: d.name,
-		// 	opacity: 0.5
-		// })
 		var marker = L.marker([d.lat, d.lon])
 			.bindPopup(popupContent)
 			// .on("click", function(e))

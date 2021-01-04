@@ -5,6 +5,7 @@
     <title>Title</title>
 </head>
 <body>
+<!-- SelfTest Module -->
 <div id="selfTest">
     <p id="testinstr">
         Examine the following statements and indicate how often you feel that way. Please answer as honestly as possible in order to get the most accurate results.
@@ -43,12 +44,10 @@
 </div>
 <script src="/d3/d3.js"></script>
 <script>
-    var interaction = [];
 
     experimentr.record();
     var data = {};
 
-    // experimentr.startTimer('demo');
 
     d3.selectAll('input')
         .filter(function(d) { return this.name === 'q1' ? this : null; })
@@ -62,14 +61,12 @@
         .filter(function(d) { return this.name === 'q3' ? this : null; })
         .on('change', function() { data.q3 = this.value; validate(); });
 
-    //validate();
-
+    // go to the next module if all fields are filled
     function validate() {
         if(data.q1 && data.q2 && data.q3) {
-            //experimentr.endTimer('demo');
             experimentr.addData(data);
             document.getElementById("next-button").disabled = false;
-            //experimentr.release();
+
         }
     }
 </script>

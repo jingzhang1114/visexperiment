@@ -5,6 +5,7 @@
     <title>Title</title>
 </head>
 <body>
+<!-- Demographics Module -->
 <div id="demographics">
     <p id="demoinstr">
         Please fill out the following demographics form.
@@ -58,8 +59,6 @@
 <script>
     var data = {};
 
-    // experimentr.startTimer('demo');
-
     d3.selectAll('input')
         .filter(function(d) { return this.name === "age" ? this : null; })
         .on('change', function() { data.age = this.value; validate(); });
@@ -76,14 +75,11 @@
         .filter(function(d) { return this.name === "monitor" ? this : null; })
         .on('change', function() { data.monitor = this.value; validate(); });
 
-    //validate();
-
+    // go to the next module if all fields are filled
     function validate() {
         if(data.age && data.sex && data.degree && data.monitor) {
-            //experimentr.endTimer('demo');
             experimentr.addData(data);
             document.getElementById("next-button").disabled = false;
-            //experimentr.release();
         }
     }
 </script>

@@ -3,18 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-<!--    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">-->
 </head>
 <body>
+    <!-- Entry of the experiment, two roles available - participant and researcher -->
     <h1 id="intr-entry">I am a </h1>
-<!--    <div class="row">-->
-<!--        <form action="/dashboard" method="GET">-->
-<!--&lt;!&ndash;            <button type="button" class="btn btn-primary role-btn" id="researcher" data-toggle="modal" data-target="#exampleModal">Researcher</button>&ndash;&gt;-->
-<!--            <button type="submit" class="btn btn-primary role-btn" id="researcher">Researcher</button>-->
-<!--        </form>-->
 
-
-<!--    </div>-->
     <div class="row">
         <button type="button" class="btn btn-outline-success role-btn" id="participant">Participant</button>
     </div>
@@ -39,7 +32,6 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-<!--                    <button type="button" class="btn btn-primary" onClick="location.href='dashboard/'" id="sign-in">Sign In</button>-->
                     <button type="button" class="btn btn-primary" onClick="signIn()" id="sign-in">Verify</button>
                 </div>
             </div>
@@ -48,8 +40,7 @@
 
 </body>
 
-<!--<script src="/jquery/jquery.js"></script>-->
-<!--<script src="/bootstrap/js/bootstrap.bundle.min.js"></script>-->
+
 
 <script>
     document.getElementById("next-button").hidden = true;
@@ -57,6 +48,7 @@
         experimentr.next();
         document.getElementById("next-button").hidden = false;
     })
+
     function signIn() {
         if(document.getElementById("password").value == "2020") {
             window.location.replace("dashboard/");

@@ -9,13 +9,13 @@
   <!-- Load Google Font -->
   <link href='https://fonts.googleapis.com/css?family=Roboto:100,400,300,400italic,700' rel='stylesheet' type='text/css'>
 
-<!--  <link rel="stylesheet" href="css/bootstrap.min.css">-->
+  <!--  <link rel="stylesheet" href="css/bootstrap.min.css">-->
   <link rel="stylesheet" href="/leaflet/leaflet.css">
   <link rel="stylesheet" href="/modules/vis/css/style.css">
 </head>
 <body>
-
-<!--  <div class="container-fluid">-->
+    <!-- Visual Study Module -->
+    <!-- Example visual tasks from CSE457 studio -->
 
     <div class="row">
       <div class="col-md-12">
@@ -34,7 +34,7 @@
       </div>
     </div>
 
-<!--  </div>-->
+
 
   <!-- Load JS libraries -->
 
@@ -47,48 +47,5 @@
   <!-- Track mouse movement and write to database -->
   <script src="/modules/vis/js/mousemove.js"></script>
 
-<!--<script>-->
-<!--  // $.holdReady(true);                              //set hold-->
-<!--  // function releaseHold() { $.holdReady(false); }  //callback to release hold-->
-<!--  // $.getScript("/modules/vis/test.js");          //load script then release hold-->
-<!--  // $.getScript("/modules/vis/test2.js", releaseHold);-->
-
-<!--  $(document).ready(function() {-->
-<!--    $.getScript("/modules/vis/stationMap.js");-->
-<!--    $.getScript("/modules/vis/main.js");-->
-<!--    document.getElementById("next-button").disabled = false;-->
-<!--  })-->
-
-<!--  // $(document).ready(function() {-->
-<!--  //   $.getScript("/modules/vis/test.js");-->
-<!--  //   $.getScript("/modules/vis/test2.js");-->
-<!--  // })-->
-<!--</script>-->
-
-<!--<script>-->
-<!--  $(document).ready(function() {-->
-
-<!--    var mousemoveData = [];-->
-
-
-<!--    var start = new Date().getTime();-->
-<!--    document.addEventListener("mousemove", trackMouseMove);-->
-<!--    function trackMouseMove(e) {-->
-<!--      //console.log(e.pageX);-->
-<!--        var move = {};-->
-<!--        move.x = e.pageX;-->
-<!--        move.y = e.pageY;-->
-<!--        move.time = new Date().getTime() - start;-->
-<!--        mousemoveData.push(move);-->
-<!--    }-->
-
-<!--    setTimeout(stopTrack, 5000);-->
-<!--    function stopTrack() {-->
-<!--      document.removeEventListener("mousemove", trackMouseMove);-->
-<!--      experimentr.addData({mousemoveData: mousemoveData});-->
-<!--      document.getElementById("next-button").disabled = false;-->
-<!--    }-->
-<!--  })-->
-<!--</script>-->
 </body>
 </html>
