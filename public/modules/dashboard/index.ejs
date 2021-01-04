@@ -4,28 +4,45 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+<!--    <style>-->
+<!--        #title {-->
+<!--            margin-top: 100px;-->
+<!--        }-->
+<!--        table {-->
+<!--            border-collapse: collapse;-->
+<!--            border-spacing: 0;-->
+<!--            width: 100%;-->
+<!--            border: 1px solid #ddd;-->
+<!--        }-->
+
+<!--        th, td {-->
+<!--            text-align: left;-->
+<!--            padding: 8px;-->
+
+<!--        }-->
+
+<!--        tr:nth-child(even){background-color: #f2f2f2}-->
+<!--        tr {-->
+<!--            height: 30px;-->
+<!--        }-->
+
+<!--    </style>-->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
         #title {
-            margin-top: 100px;
+            margin-top: 50px;
         }
-        table {
-            border-collapse: collapse;
-            border-spacing: 0;
+        tfoot input {
             width: 100%;
-            border: 1px solid #ddd;
+            padding: 3px;
+            box-sizing: border-box;
+            /*background: url("search.png") top left no-repeat;*/
+            font-family: FontAwesome;
         }
-
-        th, td {
-            text-align: left;
-            padding: 8px;
-
+        tfoot {
+            display: table-header-group;
         }
-
-        tr:nth-child(even){background-color: #f2f2f2}
-        tr {
-            height: 30px;
-        }
-
     </style>
 </head>
 <body>
@@ -36,18 +53,58 @@
         <div class="col-md-11">
             <h1>Dashboard</h1>
             <br>
-            <h2> Records (Number: <%= quotes.length %>) </h2>
+
 <!--            <h4>  </h4>-->
         </div>
         <div class="col-md-1">
-            <button id="back">Back</button>
+            <button id="back" type="button" class="btn btn-light btn-lg">Home</button>
         </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <h2> Records (Number: <%= quotes.length %>) </h2>
+        </div>
+        <div class="col-md-2">
+            <button type="button" class="btn btn-link" id="csv">Download CSV</button>
+        </div>
+        <div class="col-md-2">
+            <button type="button" class="btn btn-link" id="json">Download JSON</button>
+<!--            <a id="download-json" download="data.json">Download JSON</a>-->
+        </div>
+    </div>
+    <br>
+    <div>
+
     </div>
     <br>
     <div class="row">
         <div class="col-md-12" id="data">
             <div style="overflow-x:auto;">
-                <table>
+                <table id="example" class="display" style="width: 100%">
+                    <tfoot>
+                    <tr>
+                        <th>No.</th>
+                        <th>ParticipantID</th>
+                        <th>StartTime</th>
+                        <th>EndTime</th>
+                        <th>Age</th>
+                        <th>Sex</th>
+                        <th>Degree</th>
+                        <th>Monitor</th>
+                        <th>Q1</th>
+                        <th>Q2</th>
+                        <th>Q3</th>
+                        <th>Q4</th>
+                        <th>Q5</th>
+                        <th>Q6</th>
+                        <th>Q7</th>
+                        <th>Q8</th>
+                        <th>Q9</th>
+                        <th>Q10</th>
+                        <th></th>
+                    </tr>
+                    </tfoot>
+                    <thead>
                     <tr>
                         <th>No.</th>
                         <th>ParticipantID</th>
@@ -70,6 +127,8 @@
                         <th>Delete</th>
 
                     </tr>
+                    </thead>
+                    <tbody>
                     <% for(var i = 0; i < quotes.length; i++) {%>
                         <tr class = "quote">
 
@@ -94,6 +153,8 @@
                             <th class="delete-button" data-id="<%= quotes[i].participantId%>">Delete</th>
                         </tr>
                     <% }%>
+                    </tbody>
+
 
                 </table>
             </div>
@@ -114,21 +175,46 @@
 
 </div>
 
-<!--<form action="/quotes" method="POST">-->
-<!--    <input type="text" placeholder="name" name="name">-->
-<!--    <input type="text" placeholder="quote" name="quote">-->
-<!--    <button type="submit">Submit</button>-->
-<!--</form>-->
 <script src="/jquery/jquery.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
-
+<!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>-->
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
+<script src="/app.js"></script>
 
 <script>
+    $(document).ready(function() {
+        // Setup - add a text input to each footer cell
+
+        //console.log(quotes);
+        $('#example tfoot th').each( function () {
+            var title = $(this).text();
+            // $(this).html( '<i class="fa fa-search"><input type="text" placeholder="Search '+title+'" />' );
+            $(this).html('<input type="text" placeholder="&#xf002"/>');
+        } );
+
+        // DataTable
+        var table = $('#example').DataTable({
+            initComplete: function () {
+                // Apply the search
+                this.api().columns().every( function () {
+                    var that = this;
+
+                    $( 'input', this.footer() ).on( 'keyup change clear', function () {
+                        if ( that.search() !== this.value ) {
+                            that
+                                .search( this.value )
+                                .draw();
+                        }
+                    } );
+                } );
+            }
+        });
+
+    } );
+
     var elements = document.getElementsByClassName("delete-button");
 
     var deleteFunction = function(event) {
-        //console.log("click")
-        //console.log(event)
+
         console.log(event.target.getAttribute("data-id"))
         //console.log(event.target.attributes.data)
         const theID = event.target.getAttribute("data-id");
@@ -154,6 +240,43 @@
     document.getElementById("back").addEventListener("click", () => {
         window.location.href="../index.html"
     })
+
+    // document.getElementById("json").addEventListener("click", downloadJSON);
+    document.getElementById("json").addEventListener("click", function() {
+        <!--var getTest = "<%= quotes  %>";-->
+        <!--console.log(getTest);-->
+
+        fetch("/dashboard/downloadJSON", {
+            method: 'get',
+            headers: { 'Content-Type': 'application/json' }
+        })
+            .then(res => {
+                if (res.ok) return res.json()
+            })
+            .then(data => {
+                window.open("/dashboard/downloadJSON");
+                window.location.reload()
+            })
+    });
+
+
+    document.getElementById("csv").addEventListener("click", function() {
+        <!--var getTest = "<%= quotes  %>";-->
+        <!--console.log(getTest);-->
+
+        fetch("/dashboard/downloadCSV", {
+            method: 'get',
+            headers: { 'Content-Type': 'application/json' }
+        })
+            // .then(res => {
+            //     if (res.ok) return res.json()
+            // })
+            .then(data => {
+                window.open("/dashboard/downloadCSV");
+                //window.location.reload()
+            })
+    });
+
 </script>
 
 <!--<script src="/public/modules/dashboard/index.js"></script>-->

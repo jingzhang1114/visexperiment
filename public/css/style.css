@@ -1,5 +1,5 @@
 #experimentr {
-    margin-top: 100px;
+    margin-top: 5%;
 }
 
 body {
@@ -27,6 +27,31 @@ body {
 #selfTest {
     font-size: 18px;
 }
+
+.role-btn {
+    margin-top: 5%;
+    margin-left: 35%;
+    width: 30%;
+    height: 60px;
+    font-size: 24px;
+}
+
+#intr-entry {
+    margin-top: 5%;
+    text-align: center;
+}
+
+#password {
+    margin-left: 2%;
+}
+#sign-in-warning {
+    color: red;
+    visibility: hidden;
+}
+
+/*#researcher {*/
+
+/*}*/
 
 /*#demographics .option {*/
 /*    width: 50px;*/

@@ -60,6 +60,10 @@ var experimentr = (function() {
             })
         }
 
+        experimentr.record = function() {
+
+        }
+
         // Starts the experiment
         experimentr.start = function () {
             experimentr.init();
