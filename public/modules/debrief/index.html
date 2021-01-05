@@ -37,6 +37,8 @@
     $("#success").hide();
     experimentr.end();
     document.getElementById("feedback").addEventListener("click", () => {
+        var feedback = document.getElementById("exampleFormControlTextarea1").value;
+        experimentr.addData({feedback: feedback});
         console.log("Submit debrief!")
         $("#feedback").hide();
         $("#success").show();
