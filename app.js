@@ -46,7 +46,8 @@ app.listen(3000, () => {
 MongoClient.connect(connection, {useNewUrlParser: true}, (error, client) => {
     if(error) throw error
     database = client.db("test1")
-    collection = database.collection("demo1")
+    //collection = database.collection("demo1")
+    collection = database.collection("demo2")
     console.log("connected")
 
     app.get('/', (req, res) => {
@@ -168,15 +169,3 @@ app.delete("/dashboard", (req, res) => {
 })
 
 
-// delete a document
-app.get("/json", (req, res) => {
-    res.json(data[req.body.index].mousemoveData);
-    // collection.deleteOne(
-    //     {participantId: req.body.participantId}
-    // )
-    //     .then(result => {
-    //         console.log("delete")
-    //         res.json(`Deleted`)
-    //     })
-    //     .catch(error => console.error(error))
-})
