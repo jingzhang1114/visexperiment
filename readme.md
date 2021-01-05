@@ -1,5 +1,7 @@
 # Master Project : An Experiment Platform For Visual Analytic Tasks
 
+Jing Zhang zjing@wustl.edu
+
 * Demo: http://ec2-3-84-52-50.compute-1.amazonaws.com:3001/index.html 
 
 ## Introduction
@@ -37,6 +39,8 @@ npm_modules are libraries installed for this project. public stores all front-en
 
 add module folders in /public/modules
 
+edit the file reference in the module just added
+
 modify the sequence of modules in public/index.html
 
 edit app.js to connect database and respond new requests from front-end
@@ -49,7 +53,7 @@ Demographics module:/public/modules/demographics
 
 Debrief module:/public/modules/debrief
 
-Mouse event Logs for visual task module: /public/modules/vis/js/mousemove.js
+Mouse event Logs for visual task module: /public/modules/vis/js/mousemove.js, /public/modules/vis2/click.js
 
 
 ## Reference
