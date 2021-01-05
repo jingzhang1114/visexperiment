@@ -35,6 +35,8 @@ const connection = 'mongodb+srv://test1:datavis@gettingstarted.kf9d9.gcp.mongodb
 
 var database, collection, data;
 
+var fields = [];
+
 
 app.listen(3000, () => {
     console.log(`Example app listening at http://localhost:${port}`)
@@ -91,8 +93,17 @@ app.get('/dashboard', (req, res) => {
 
     collection.find().toArray().then(results => {
         console.log("get the data")
-        //res.sendFile(__dirname + "/public/modules/consent/index.html")
-        res.render(__dirname + "/public/modules/dashboard/index.ejs", {quotes: results})
+
+
+        results.forEach(function(d) {
+            Object.keys(d).forEach(function(key){
+                if(!fields.includes(key)) {
+                    fields.push(key);
+                }
+            })
+        })
+
+        res.render(__dirname + "/public/modules/dashboard/index.ejs", {quotes: results, keys: fields})
         data = results
     })
         .catch(error => console.error(error))
@@ -124,14 +135,7 @@ app.get('/dashboard/downloadCSV', (req, res) => {
     // Write to file
 
     //var fields = Object.keys(data[0]);
-    var fields = [];
-    data.forEach(function(d) {
-        Object.keys(d).forEach(function(key){
-            if(!fields.includes(key)) {
-                fields.push(key);
-            }
-        })
-    })
+
     var filePath = "result/data.csv";
     try {
         var csv = json2csv(data, {fields});
@@ -163,3 +167,16 @@ app.delete("/dashboard", (req, res) => {
         .catch(error => console.error(error))
 })
 
+
+// delete a document
+app.get("/json", (req, res) => {
+    res.json(data[req.body.index].mousemoveData);
+    // collection.deleteOne(
+    //     {participantId: req.body.participantId}
+    // )
+    //     .then(result => {
+    //         console.log("delete")
+    //         res.json(`Deleted`)
+    //     })
+    //     .catch(error => console.error(error))
+})
